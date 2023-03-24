@@ -4,6 +4,7 @@ import NavBar from "./NavBar";
 import Login from "./Login"
 import New from "./New"
 import PostList from "./PostList"
+import Home from "./Home";
 
 
 function App() {
