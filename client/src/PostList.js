@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
+import PostForm from "./PostForm";
 
 function PostList() {
 
@@ -13,6 +14,7 @@ function PostList() {
 
     return (
         <>
+            <PostForm />
             {posts.map((post) => (
                 <Post
                     key={post.id}
