@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import OptionList from "./OptionList";
 import Error from "./Error";
 
-function PostForm() {
+function PostForm({ cryptids, locations }) {
     const [cryptidId, setCryptidId] = useState(0)
     const [locationId, setLocationId] = useState(0)
     const [comment, setComment] = useState("");
