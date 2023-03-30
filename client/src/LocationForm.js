@@ -41,7 +41,7 @@ function LocationForm() {
                     onChange={(e) => setName(e.target.value)}
                 />
                 <button type="submit">
-                    {isLoading ? "Loading..." : "Submit Recipe"}
+                    {isLoading ? "Loading..." : "Submit Location"}
                 </button>
                 {errors.map((err) => (
                     <Error key={err}>{err}</Error>

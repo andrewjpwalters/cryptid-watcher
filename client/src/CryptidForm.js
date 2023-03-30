@@ -60,7 +60,7 @@ function CryptidForm({ user }) {
                     onChange={(e) => setUrl(e.target.value)}
                 />
                 <button type="submit">
-                    {isLoading ? "Loading..." : "Submit Recipe"}
+                    {isLoading ? "Loading..." : "Submit Cryptid"}
                 </button>
                 {errors.map((err) => (
                     <Error key={err}>{err}</Error>

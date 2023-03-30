@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "./Login"
 import New from "./New"
 import PostList from "./PostList"
+import CryptidList from "./CryptidList";
 import Home from "./Home";
 
 
