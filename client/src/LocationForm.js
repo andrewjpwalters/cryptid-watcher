@@ -22,7 +22,7 @@ function LocationForm() {
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                history.push("/post");
+                history.push("/posts");
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }

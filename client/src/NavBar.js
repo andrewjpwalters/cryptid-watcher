@@ -3,9 +3,9 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function NavBar() {
+function NavBar({ user, setUser }) {
 
-    function handleLogoutClick({ setUser }) {
+    function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {
                 setUser(null);
@@ -20,17 +20,17 @@ function NavBar() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                    <LinkContainer to="/cryptid" exact>
+                    <LinkContainer to="/cryptids" exact>
                         <Nav.Link>Cryptids</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to="/post" exact>
+                    <LinkContainer to="/posts" exact>
                         <Nav.Link>Report Sightings</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/new">
                         <Nav.Link>Submit Cryptid</Nav.Link>
                     </LinkContainer>
                     <button onClick={handleLogoutClick}>
-                        Logout
+                        Logout, {user.username}
                     </button>
 
                 </Nav>
