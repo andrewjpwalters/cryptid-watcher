@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useHistory } from "react-router";
+import OptionList from "./OptionList";
 import Error from "./Error";
 
 function PostForm() {
-    const [cryptid, setCryptid] = useState(0)
-    const [location, setLocation] = useState(0)
+    const [cryptidId, setCryptidId] = useState(0)
+    const [locationId, setLocationId] = useState(0)
     const [comment, setComment] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -19,8 +20,8 @@ function PostForm() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                cryptid_id,
-                location_id,
+                cryptid_id: cryptidId,
+                location_id: locationId,
                 comment
             }),
         }).then((r) => {
@@ -33,14 +34,44 @@ function PostForm() {
         });
     }
 
+    const cryptidData = cryptids.map((crytpidObj) => {
+        return <OptionList
+            key={crytpidObj.id}
+            id={crytpidObj.id}
+            name={crytpidObj.name}
+        />
+    })
+
+    const locationData = locations.map((locationObj) => {
+        return <OptionList
+            key={locationObj.id}
+            id={locationObj.id}
+            name={locationObj.name}
+        />
+    })
+
     return (
         <>
             <h2>Submit Sighting</h2>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="cryptid">Cryptid</label>
-                <select />
-                <label htmlFor="location">Location</label>
-                <select />
+                <label htmlFor="cryptid_id">Cryptid</label>
+                <select
+                    id="cryptid_id"
+                    value={cryptidId}
+                    onChange={(e) => setCryptidId(e.target.value)}
+                >
+                    <option value="null">Choose a Cryptid</option>
+                    {cryptidData}
+                </select>
+                <label htmlFor="location_id">Location</label>
+                <select
+                    id="location_id"
+                    value={locationId}
+                    onChange={(e) => setLocationId(e.target.value)}
+                >
+                    <option value="null">Choose a Location</option>
+                    {locationData}
+                </select>
                 <label htmlFor="comment">Comment</label>
                 <input
                     type="text"
