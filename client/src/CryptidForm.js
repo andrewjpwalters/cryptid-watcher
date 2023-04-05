@@ -68,6 +68,7 @@ function CryptidForm({ user }) {
             </form>
             <div>
                 <h1>{name}</h1>
+                <img src={url} alt="" />
                 <ReactMarkdown>{description}</ReactMarkdown>
                 <cite>By {user.username}</cite>
             </div>
