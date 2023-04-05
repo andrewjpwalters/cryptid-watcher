@@ -1,15 +1,13 @@
 import { useState } from "react";
-import { useHistory } from "react-router";
-import OptionList from "./OptionList";
+import OptionList from "./OptionList.js";
 import Error from "./Error";
 
 function PostForm({ cryptids, locations }) {
-    const [cryptidId, setCryptidId] = useState(0)
-    const [locationId, setLocationId] = useState(0)
+    const [cryptidId, setCryptidId] = useState("")
+    const [locationId, setLocationId] = useState("")
     const [comment, setComment] = useState("");
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const history = useHistory();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -27,7 +25,9 @@ function PostForm({ cryptids, locations }) {
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                history.push("/posts");
+                setCryptidId("")
+                setLocationId("")
+                setComment("")
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
