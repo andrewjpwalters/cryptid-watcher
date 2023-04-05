@@ -1,6 +1,14 @@
 import React from "react"
+import Location from "./Location"
 
 function Cryptid({ name, img_url, description, user, locations }) {
+
+    const filteredLocations = locations.reduce((accumulator, current) => {
+        if (!accumulator.find((item) => item.name === current.name)) {
+            accumulator.push(current);
+        }
+        return accumulator;
+    }, []);
 
     return (
         <div>
@@ -10,9 +18,12 @@ function Cryptid({ name, img_url, description, user, locations }) {
             <p>Submitted by {user}</p>
             <p>Known Locations:</p>
             <ul>
-                {/* {locations.map((location) => (
-                    <li>{location.name}</li>
-                ))} */}
+                {filteredLocations.map((location) => (
+                    <Location
+                        key={location.id}
+                        name={location.name}
+                    />
+                ))}
             </ul>
         </div>
     )
