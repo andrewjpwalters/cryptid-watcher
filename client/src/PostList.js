@@ -44,8 +44,10 @@ function PostList() {
                     id={post.id}
                     comment={post.comment}
                     user={post.user.username}
-                    cryptid={post.cryptid.name}
-                    location={post.location.name}
+                    cryptid={post.cryptid}
+                    cryptids={cryptids}
+                    location={post.location}
+                    locations={locations}
                     onPostDelete={handleDeletePost}
                 />
             ))}
