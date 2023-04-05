@@ -27,6 +27,7 @@ function PostList() {
     }, []);
 
     function handleAddPost(newPost) {
+        console.log(newPost)
         setPosts([...posts, newPost])
     };
 

@@ -28,7 +28,7 @@ function PostForm({ cryptids, locations, onAddPost }) {
                 setCryptidId("")
                 setLocationId("")
                 setComment("")
-                onAddPost(r)
+                r.json().then((newPost) => onAddPost(newPost))
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
