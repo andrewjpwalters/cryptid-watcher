@@ -26,9 +26,13 @@ function PostList() {
             .then(setLocations)
     }, []);
 
+    function handleAddPost(newPost) {
+        setPosts([...posts, newPost])
+    };
+
     return (
         <>
-            <PostForm cryptids={cryptids} locations={locations} />
+            <PostForm cryptids={cryptids} locations={locations} onAddPost={handleAddPost} />
             {posts.map((post) => (
                 <Post
                     key={post.id}
@@ -36,6 +40,7 @@ function PostList() {
                     comment={post.comment}
                     user={post.user.username}
                     cryptid={post.cryptid.name}
+                    location={post.location.name}
                 />
             ))}
         </>

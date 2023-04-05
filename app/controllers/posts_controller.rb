@@ -8,25 +8,25 @@ class PostsController < ApplicationController
     render json: post, status: :created
   end
   
-  # def update
-  #   post = Post.find_by(id:params[:id])
-  #   if post
-  #     post.update(post_params)
-  #     render json: post, status: :accepted
-  #   else
-  #     render json: {error: “Not found”}, status: :not_found
-  #   end
-  # end
+  def update
+    post = Post.find_by(id:params[:id])
+    if post
+      post.update(post_params)
+      render json: post, status: :accepted
+    else
+      render json: {error: "Post not found"}, status: :not_found
+    end
+  end
   
-  # def destroy
-  #   post = Post.find_by(id:params[:id])
-  #   if post
-  #     post.destroy
-  #     head :no_content
-  #   else
-  #     render json: {error: “Not found“}, status: :not_found
-  #   end
-	# end
+  def destroy
+    post = Post.find_by(id:params[:id])
+    if post
+      post.destroy
+      head :no_content
+    else
+      render json: {error: "Post not found"}, status: :not_found
+    end
+	end
   
   private
   

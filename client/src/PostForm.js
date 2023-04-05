@@ -2,7 +2,7 @@ import { useState } from "react";
 import OptionList from "./OptionList.js";
 import Error from "./Error";
 
-function PostForm({ cryptids, locations }) {
+function PostForm({ cryptids, locations, onAddPost }) {
     const [cryptidId, setCryptidId] = useState("")
     const [locationId, setLocationId] = useState("")
     const [comment, setComment] = useState("");
@@ -28,6 +28,7 @@ function PostForm({ cryptids, locations }) {
                 setCryptidId("")
                 setLocationId("")
                 setComment("")
+                onAddPost(r)
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
