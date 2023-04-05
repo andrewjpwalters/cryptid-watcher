@@ -1,7 +1,7 @@
 class User < ApplicationRecord
     has_many :locations
     has_many :posts
-    has_many :cryptids, through: :posts
+    has_many :cryptids
     
     has_secure_password
 

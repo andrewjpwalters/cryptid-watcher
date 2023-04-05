@@ -24,6 +24,7 @@ function CryptidList() {
                     img_url={cryptid.image_url}
                     description={cryptid.description}
                     user={cryptid.user.username}
+                    locations={cryptid.locations}
                 />
             ))}
         </>

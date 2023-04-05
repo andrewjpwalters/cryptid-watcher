@@ -1,7 +1,8 @@
 class Cryptid < ApplicationRecord
   belongs_to :user
   has_many :posts
-  has_many :users, through: :posts
+  has_many :locations, through: :posts
 
-  validates :name, :description, :image_url, presence: true
+  validates :description, :image_url, presence: true
+  validates :name, presence: true, uniqueness: true
 end
