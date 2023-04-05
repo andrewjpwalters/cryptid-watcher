@@ -30,6 +30,11 @@ function PostList() {
         setPosts([...posts, newPost])
     };
 
+    function handleDeletePost(id) {
+        const updatedPosts = posts.filter((post) => post.id !== id);
+        setPosts(updatedPosts)
+    }
+
     return (
         <>
             <PostForm cryptids={cryptids} locations={locations} onAddPost={handleAddPost} />
@@ -41,6 +46,7 @@ function PostList() {
                     user={post.user.username}
                     cryptid={post.cryptid.name}
                     location={post.location.name}
+                    onPostDelete={handleDeletePost}
                 />
             ))}
         </>
