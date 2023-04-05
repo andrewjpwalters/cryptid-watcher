@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Post from "./Post";
 import PostForm from "./PostForm";
+import Post from "./Post";
 
 function PostList() {
 
