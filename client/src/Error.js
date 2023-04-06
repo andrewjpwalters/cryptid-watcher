@@ -1,8 +1,8 @@
 function Error({ children }) {
     return (
         <>
-            <p>ERROR</p>
-            <p>{children}</p>
+            <p className="text-danger fw-bold">ERROR</p>
+            <p className="text-danger fw-bold">{children}</p>
         </>
     );
 }
