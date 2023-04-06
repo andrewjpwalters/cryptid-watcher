@@ -13,7 +13,7 @@ function Cryptid({ name, img_url, description, user, locations }) {
     return (
         <div>
             <p>{name}</p>
-            <img src={img_url} alt="" />
+            <img src={img_url} alt={name} />
             <p>{description}</p>
             <p>Submitted by {user}</p>
             <p>Known Locations:</p>

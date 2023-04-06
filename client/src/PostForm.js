@@ -7,11 +7,9 @@ function PostForm({ cryptids, locations, onAddPost }) {
     const [locationId, setLocationId] = useState("")
     const [comment, setComment] = useState("");
     const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsLoading(true);
         fetch("/posts", {
             method: "POST",
             headers: {
@@ -23,7 +21,6 @@ function PostForm({ cryptids, locations, onAddPost }) {
                 comment
             }),
         }).then((r) => {
-            setIsLoading(false);
             if (r.ok) {
                 setCryptidId("")
                 setLocationId("")
@@ -52,42 +49,53 @@ function PostForm({ cryptids, locations, onAddPost }) {
     })
 
     return (
-        <>
+        <div className="mt-4">
             <h2>Submit Sighting</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="cryptid_id">Cryptid</label>
-                <select
-                    id="cryptid_id"
-                    value={cryptidId}
-                    onChange={(e) => setCryptidId(e.target.value)}
-                >
-                    <option value="null">Choose a Cryptid</option>
-                    {cryptidData}
-                </select>
-                <label htmlFor="location_id">Location</label>
-                <select
-                    id="location_id"
-                    value={locationId}
-                    onChange={(e) => setLocationId(e.target.value)}
-                >
-                    <option value="null">Choose a Location</option>
-                    {locationData}
-                </select>
-                <label htmlFor="comment">Comment</label>
-                <input
-                    type="text"
-                    id="comment"
-                    value={comment}
-                    onChange={(e) => setComment(e.target.value)}
-                />
-                <button type="submit">
-                    {isLoading ? "Loading..." : "Submit Sighting"}
-                </button>
-                {errors.map((err) => (
-                    <Error key={err}>{err}</Error>
-                ))}
+            <form onSubmit={handleSubmit} className="row gy-2 gx-3 align-items-center">
+                <div className="form-group gap-2">
+                    <div className="col-auto">
+                        <label htmlFor="cryptid_id">Cryptid</label>
+                        <select
+                            id="cryptid_id"
+                            className="form-select mb-1"
+                            value={cryptidId}
+                            onChange={(e) => setCryptidId(e.target.value)}
+                        >
+                            <option value="null">Choose a Cryptid</option>
+                            {cryptidData}
+                        </select>
+                    </div>
+                    <div className="col-auto">
+                        <label htmlFor="location_id">Location</label>
+                        <select
+                            id="location_id"
+                            className="form-select mb-1"
+                            value={locationId}
+                            onChange={(e) => setLocationId(e.target.value)}
+                        >
+                            <option value="null">Choose a Location</option>
+                            {locationData}
+                        </select>
+                    </div>
+                    <div className="col-auto">
+                        <label htmlFor="comment">Comment</label>
+                        <input
+                            type="text"
+                            id="comment"
+                            className="form-control mb-1"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-auto">
+                        <input className="btn btn-outline-dark" type="submit" value="Submit" />
+                    </div>
+                    {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </div>
             </form>
-        </>
+        </div>
     );
 }
 

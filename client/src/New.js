@@ -24,12 +24,12 @@ function New() {
             ) : (
                 <button
                     onClick={handleShowCryptidForm}
-                    className="text-center btn btn-outline-dark mb-1"
+                    className="text-center btn btn-outline-dark mt-4"
                 >
                     Submit Cryptid
                 </button>
             )}
-            <h3>OR</h3>
+            <h4 className="my-4">OR</h4>
             {showLocationForm ? (
                 <LocationForm />
             ) : (

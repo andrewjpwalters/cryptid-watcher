@@ -7,7 +7,6 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
     const [locationId, setLocationId] = useState(location)
     const [userComment, setUserComment] = useState(comment);
     const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -22,7 +21,6 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
                 comment: userComment
             }),
         }).then((r) => {
-            setIsLoading(false);
             if (r.ok) {
                 r.json().then((updatedPost) => onUpdatePost(updatedPost))
             } else {
@@ -48,43 +46,54 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
     })
 
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="cryptid_id">Cryptid</label>
-                <select
-                    id="cryptid_id"
-                    defaultValue={cryptidId}
-                    value={cryptidId}
-                    onChange={(e) => setCryptidId(e.target.value)}
-                >
-                    <option value="null">No Change</option>
-                    {cryptidData}
-                </select>
-                <label htmlFor="location_id">Location</label>
-                <select
-                    id="location_id"
-                    defaultValue={locationId}
-                    value={locationId}
-                    onChange={(e) => setLocationId(e.target.value)}
-                >
-                    <option value="null">No Change</option>
-                    {locationData}
-                </select>
-                <label htmlFor="comment">Comment</label>
-                <input
-                    type="text"
-                    id="comment"
-                    value={userComment}
-                    onChange={(e) => setUserComment(e.target.value)}
-                />
-                <button type="submit">
-                    {isLoading ? "Loading..." : "Update Sighting"}
-                </button>
-                {errors.map((err) => (
-                    <Error key={err}>{err}</Error>
-                ))}
+        <div className="mt-4">
+            <form onSubmit={handleSubmit} className="row gy-2 gx-3 align-items-center">
+                <div className="form-group gap-2">
+                    <div className="col-auto">
+                        <label htmlFor="cryptid_id">Cryptid</label>
+                        <select
+                            id="cryptid_id"
+                            className="form-select mb-1"
+                            defaultValue={cryptidId}
+                            value={cryptidId}
+                            onChange={(e) => setCryptidId(e.target.value)}
+                        >
+                            <option value="null">No Change</option>
+                            {cryptidData}
+                        </select>
+                    </div>
+                    <div className="col-auto">
+                        <label htmlFor="location_id">Location</label>
+                        <select
+                            id="location_id"
+                            className="form-select mb-1"
+                            defaultValue={locationId}
+                            value={locationId}
+                            onChange={(e) => setLocationId(e.target.value)}
+                        >
+                            <option value="null">No Change</option>
+                            {locationData}
+                        </select>
+                    </div>
+                    <div className="col-auto">
+                        <label htmlFor="comment">Comment</label>
+                        <input
+                            type="text"
+                            id="comment"
+                            className="form-control mb-1"
+                            value={userComment}
+                            onChange={(e) => setUserComment(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-auto">
+                        <input className="btn btn-outline-dark" type="submit" value="Submit" />
+                    </div>
+                    {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </div>
             </form>
-        </>
+        </div>
     );
 
 }

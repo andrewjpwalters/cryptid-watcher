@@ -25,6 +25,7 @@ function LoginForm({ onLogin }) {
 
     return (
         <div className="mt-4">
+            <h4>Login</h4>
             <form onSubmit={handleSubmit} className="row gy-2 gx-3 align-items-center">
                 <div className="form-group gap-2">
                     <div className="col-auto">

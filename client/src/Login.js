@@ -8,7 +8,7 @@ function Login({ onLogin }) {
 
     return (
         <Container>
-            <h1>Cryptid Watcher</h1>
+            <h1 className="display-1">Cryptid Watcher</h1>
             {showLogin ? (
                 <>
                     <LoginForm onLogin={onLogin} />
