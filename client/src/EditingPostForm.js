@@ -53,19 +53,21 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
                 <label htmlFor="cryptid_id">Cryptid</label>
                 <select
                     id="cryptid_id"
+                    defaultValue={cryptidId}
                     value={cryptidId}
                     onChange={(e) => setCryptidId(e.target.value)}
                 >
-                    <option value="null">Choose a Cryptid</option>
+                    <option value="null">No Change</option>
                     {cryptidData}
                 </select>
                 <label htmlFor="location_id">Location</label>
                 <select
                     id="location_id"
+                    defaultValue={locationId}
                     value={locationId}
                     onChange={(e) => setLocationId(e.target.value)}
                 >
-                    <option value="null">Choose a Location</option>
+                    <option value="null">No Change</option>
                     {locationData}
                 </select>
                 <label htmlFor="comment">Comment</label>

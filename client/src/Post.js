@@ -32,6 +32,7 @@ function Post({
             <h3>{cryptid.name}</h3>
             <h4>{location.name}</h4>
             <p>{comment}</p>
+            <p>Submitted by {user}</p>
             {isEditing ? (
                 <EditingPostForm
                     id={id}
@@ -46,7 +47,6 @@ function Post({
                 <>
                 </>
             )}
-            <p>Submitted by {user}</p>
             <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
                 {isEditing ? ("Cancel Edit") : ("Edit Sighting")}
             </button>
