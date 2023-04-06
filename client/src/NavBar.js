@@ -4,6 +4,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useContext } from "react";
+import { Button } from 'react-bootstrap'
 
 function NavBar() {
     const { user, setUser } = useContext(UserContext)
@@ -31,9 +32,9 @@ function NavBar() {
                     <LinkContainer to="/new">
                         <Nav.Link>Submit New</Nav.Link>
                     </LinkContainer>
-                    <button onClick={handleLogoutClick}>
+                    <Button variant="outline-dark" onClick={handleLogoutClick}>
                         Logout, {user.username}
-                    </button>
+                    </Button>
 
                 </Nav>
             </Navbar.Collapse>
