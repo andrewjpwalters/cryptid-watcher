@@ -29,7 +29,7 @@ function NavBar() {
                         <Nav.Link>Report Sightings</Nav.Link>
                     </LinkContainer>
                     <LinkContainer to="/new">
-                        <Nav.Link>Submit Cryptid</Nav.Link>
+                        <Nav.Link>Submit New</Nav.Link>
                     </LinkContainer>
                     <button onClick={handleLogoutClick}>
                         Logout, {user.username}

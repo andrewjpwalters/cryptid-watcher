@@ -22,7 +22,10 @@ function New() {
             {showCryptidForm ? (
                 <CryptidForm />
             ) : (
-                <button onClick={handleShowCryptidForm}>
+                <button
+                    onClick={handleShowCryptidForm}
+                    className="text-center btn btn-outline-dark mb-1"
+                >
                     Submit Cryptid
                 </button>
             )}
@@ -30,7 +33,10 @@ function New() {
             {showLocationForm ? (
                 <LocationForm />
             ) : (
-                <button onClick={handleShowLocationForm}>
+                <button
+                    onClick={handleShowLocationForm}
+                    className="text-center btn btn-outline-dark mb-1"
+                >
                     Submit Location
                 </button>
             )}

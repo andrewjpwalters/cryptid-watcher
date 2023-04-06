@@ -10,12 +10,10 @@ function CryptidForm() {
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState("");
     const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsLoading(true);
         fetch("/cryptids", {
             method: "POST",
             headers: {
@@ -27,7 +25,6 @@ function CryptidForm() {
                 image_url: url,
             }),
         }).then((r) => {
-            setIsLoading(false);
             if (r.ok) {
                 history.push("/cryptids");
             } else {
@@ -37,36 +34,47 @@ function CryptidForm() {
     }
 
     return (
-        <>
+        <div className="mt-4">
             <h2>Submit Cryptid</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <label htmlFor="description">Description</label>
-                <textarea
-                    id="description"
-                    rows="10"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-                <label htmlFor="url">Image URL</label>
-                <input
-                    type="text"
-                    id="url"
-                    value={url}
-                    onChange={(e) => setUrl(e.target.value)}
-                />
-                <button type="submit">
-                    {isLoading ? "Loading..." : "Submit Cryptid"}
-                </button>
-                {errors.map((err) => (
-                    <Error key={err}>{err}</Error>
-                ))}
+            <form onSubmit={handleSubmit} className="row gy-2 gx-3 align-items-center">
+                <div className="form-group gap-2">
+                    <div className="col-auto">
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            className="form-control mb-1"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-auto">
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                            id="description"
+                            rows="5"
+                            className="form-select mb-1"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-auto">
+                        <label htmlFor="url">Image URL</label>
+                        <input
+                            type="text"
+                            id="url"
+                            className="form-control mb-1"
+                            value={url}
+                            onChange={(e) => setUrl(e.target.value)}
+                        />
+                    </div>
+                    <div className="col-auto">
+                        <input className="btn btn-outline-dark" type="submit" value="Submit" />
+                    </div>
+                    {errors.map((err) => (
+                        <Error key={err}>{err}</Error>
+                    ))}
+                </div>
             </form>
             <div>
                 <h3>Preview</h3>
@@ -75,7 +83,7 @@ function CryptidForm() {
                 <ReactMarkdown>{description}</ReactMarkdown>
                 <cite>Submitted by {user.username}</cite>
             </div>
-        </>
+        </div>
     );
 }
 
