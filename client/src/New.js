@@ -1,11 +1,11 @@
 import CryptidForm from "./CryptidForm";
 import LocationForm from "./LocationForm";
 
-function New({ user }) {
+function New() {
     return (
         <>
             <h1>Hello from New</h1>
-            <CryptidForm user={user} />
+            <CryptidForm />
             <LocationForm />
 
         </>

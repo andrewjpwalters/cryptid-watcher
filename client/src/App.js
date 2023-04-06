@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { UserContext } from "./context/user";
 import NavBar from "./NavBar";
 import Login from "./Login"
 import New from "./New"
@@ -9,7 +10,7 @@ import Home from "./Home";
 
 
 function App() {
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useContext(UserContext)
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -17,23 +18,23 @@ function App() {
         r.json().then((user) => setUser(user));
       }
     });
-  }, []);
+  }, [setUser]);
 
   if (!user) return <Login onLogin={setUser} />;
 
   return (
     <>
-      <NavBar user={user} setUser={setUser} />
+      <NavBar />
       <main>
         <Switch>
           <Route exact path="/new">
-            <New user={user} />
+            <New />
           </Route>
           <Route exact path="/cryptids">
             <CryptidList />
           </Route>
           <Route exact path="/posts">
-            <PostList user={user} />
+            <PostList />
           </Route>
           <Route exact path="/">
             <Home />

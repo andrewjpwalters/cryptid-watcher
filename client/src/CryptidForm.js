@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useHistory } from "react-router";
 import ReactMarkdown from "react-markdown";
+import { UserContext } from "./context/user";
 import Error from "./Error";
 
-function CryptidForm({ user }) {
+function CryptidForm() {
+    const { user } = useContext(UserContext)
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [url, setUrl] = useState("");

@@ -1,10 +1,12 @@
+import { UserContext } from "./context/user";
 import { LinkContainer } from "react-router-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { useContext } from "react";
 
-function NavBar({ user, setUser }) {
-
+function NavBar() {
+    const { user, setUser } = useContext(UserContext)
     function handleLogoutClick() {
         fetch("/logout", { method: "DELETE" }).then((r) => {
             if (r.ok) {

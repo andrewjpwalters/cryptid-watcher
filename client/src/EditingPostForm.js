@@ -26,7 +26,7 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
             if (r.ok) {
                 r.json().then((updatedPost) => onUpdatePost(updatedPost))
             } else {
-                r.json().then((err) => setErrors(err.errors));
+                r.json().then((err) => setErrors(err.error));
             }
         });
     }

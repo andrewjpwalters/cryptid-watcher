@@ -55,7 +55,7 @@ function PostList() {
                     key={post.id}
                     id={post.id}
                     comment={post.comment}
-                    user={post.user.username}
+                    postUser={post.user}
                     cryptid={post.cryptid}
                     cryptids={cryptids}
                     location={post.location}

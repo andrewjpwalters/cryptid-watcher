@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "./context/user";
 import EditingPostForm from "./EditingPostForm";
 
 function Post({
     id,
     comment,
-    user,
+    postUser,
     cryptid,
     cryptids,
     location,
@@ -12,7 +13,7 @@ function Post({
     onPostDelete,
     onUpdatePost
 }) {
-
+    const { user } = useContext(UserContext)
     const [isEditing, setIsEditing] = useState(false)
 
     function handleDeletePost() {
@@ -32,7 +33,7 @@ function Post({
             <h3>{cryptid.name}</h3>
             <h4>{location.name}</h4>
             <p>{comment}</p>
-            <p>Submitted by {user}</p>
+            <p>Submitted by {postUser.username}</p>
             {isEditing ? (
                 <EditingPostForm
                     id={id}
@@ -47,10 +48,16 @@ function Post({
                 <>
                 </>
             )}
-            <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
-                {isEditing ? ("Cancel Edit") : ("Edit Sighting")}
-            </button>
-            <button onClick={handleDeletePost}>Delete Sighting</button>
+            {user.id === postUser.id ? (
+                <>
+                    <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                        {isEditing ? ("Cancel Edit") : ("Edit Sighting")}
+                    </button>
+                    <button onClick={handleDeletePost}>Delete Sighting</button>
+                </>
+            ) : (
+                <></>
+            )}
         </div>
 
     )
