@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   
   def update
     post = Post.find_by(id:params[:id])
+    return render json: {error: "Not Authorized"}, status: :unauthorized unless post.user_id === @current_user.id
     if post
       post.update(post_params)
       render json: post, status: :accepted
@@ -20,6 +21,7 @@ class PostsController < ApplicationController
   
   def destroy
     post = Post.find_by(id:params[:id])
+    return render json: {error: "Not Authorized"}, status: :unauthorized unless post.user_id === @current_user.id
     if post
       post.destroy
       head :no_content
