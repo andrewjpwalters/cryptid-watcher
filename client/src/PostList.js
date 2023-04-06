@@ -4,6 +4,10 @@ import Post from "./Post";
 
 function PostList() {
 
+    //look into why option isn't set properly
+    //change button so that it says cancel edit
+    //maybe don't have original post disappear
+    //make sure you can actually edit it
     const [posts, setPosts] = useState([])
     const [cryptids, setCryptids] = useState([])
     const [locations, setLocations] = useState([])

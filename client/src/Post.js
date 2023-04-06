@@ -47,7 +47,9 @@ function Post({
                 </>
             )}
             <p>Submitted by {user}</p>
-            <button onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit Sighting</button>
+            <button onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                {isEditing ? ("Cancel Edit") : ("Edit Sighting")}
+            </button>
             <button onClick={handleDeletePost}>Delete Sighting</button>
         </div>
 
