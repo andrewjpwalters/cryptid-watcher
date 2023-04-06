@@ -1,7 +1,7 @@
 function Error({ children }) {
     return (
         <>
-            <p>!</p>
+            <p>ERROR</p>
             <p>{children}</p>
         </>
     );
