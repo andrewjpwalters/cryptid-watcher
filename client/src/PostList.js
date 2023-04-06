@@ -4,8 +4,6 @@ import Post from "./Post";
 
 function PostList() {
 
-    //look into why option isn't set properly (value is being stored, but not displayed)
-
     const [posts, setPosts] = useState([])
     const [cryptids, setCryptids] = useState([])
     const [locations, setLocations] = useState([])
@@ -52,7 +50,7 @@ function PostList() {
     return (
         <>
             <PostForm cryptids={cryptids} locations={locations} onAddPost={handleAddPost} />
-            {posts.map((post) => (
+            {posts.slice(0).reverse().map((post) => (
                 <Post
                     key={post.id}
                     id={post.id}
