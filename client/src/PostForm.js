@@ -79,8 +79,9 @@ function PostForm({ cryptids, locations, onAddPost }) {
                     </div>
                     <div className="col-auto">
                         <label htmlFor="comment">Comment</label>
-                        <input
+                        <textarea
                             type="text"
+                            rows="5"
                             id="comment"
                             className="form-control mb-1"
                             value={comment}

@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { useHistory } from "react-router";
 import ReactMarkdown from "react-markdown";
 import { UserContext } from "./context/user";
+import { Card } from "react-bootstrap";
 import Error from "./Error";
 
 function CryptidForm() {
@@ -68,7 +69,7 @@ function CryptidForm() {
                             onChange={(e) => setUrl(e.target.value)}
                         />
                     </div>
-                    <div className="col-auto">
+                    <div className="col-auto mt-2">
                         <input className="btn btn-outline-dark" type="submit" value="Submit" />
                     </div>
                     {errors.map((err) => (
@@ -76,15 +77,35 @@ function CryptidForm() {
                     ))}
                 </div>
             </form>
-            <div>
+            <div className="mt-4">
                 <h3>Preview</h3>
-                <h4>{name}</h4>
-                <img src={url} alt="" />
-                <ReactMarkdown>{description}</ReactMarkdown>
-                <cite>Submitted by {user.username}</cite>
+                <Card className="text-center my-2 p-2" style={{ width: '30rem' }}>
+                    <Card.Body>
+                        <Card.Img variant="top" src={url} />
+                        <Card.Title>{name}</Card.Title>
+                        <ReactMarkdown>{description}</ReactMarkdown>
+                        <Card.Text className="fst-italic">Submitted by {user.username}</Card.Text>
+                    </Card.Body>
+                </Card>
             </div>
         </div>
     );
 }
 
 export default CryptidForm
+
+{/* <Card className="text-center my-2 p-2" style={{ width: '30rem' }}>
+            <Card.Img variant="top" src={img_url} alt={name} />
+            <Card.Body>
+                <Card.Title className="my-3">{name}</Card.Title>
+                <Card.Text>{description}</Card.Text>
+                <Card.Text className="fst-italic">Submitted by {user}</Card.Text>
+                <Card.Text className="text-decoration-underline">Known Locations:</Card.Text>
+                {filteredLocations.map((location) => (
+                    <Location
+                        key={location.id}
+                        name={location.name}
+                    />
+                ))}
+            </Card.Body>
+        </Card> */}

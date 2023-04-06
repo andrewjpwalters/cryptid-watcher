@@ -1,6 +1,8 @@
+import { Card } from "react-bootstrap"
+
 function Location({ name, id }) {
     return (
-        <li value={id}>{name}</li>
+        <Card.Text className="fw-light" value={id}>{name}</Card.Text>
     )
 }
 

@@ -15,7 +15,7 @@ function CryptidList() {
 
     return (
         <>
-            <h1>Hello from Cryptid</h1>
+            <h2 className='display-3'>Known Cryptids</h2>
             {cryptids.map((cryptid) => (
                 <Cryptid
                     key={cryptid.id}

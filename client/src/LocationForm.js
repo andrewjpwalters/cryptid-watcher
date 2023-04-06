@@ -41,7 +41,7 @@ function LocationForm() {
                             onChange={(e) => setName(e.target.value)}
                         />
                     </div>
-                    <input className="btn btn-outline-dark" type="submit" value="Submit" />
+                    <input className="btn btn-outline-dark mt-2" type="submit" value="Submit" />
                 </div>
                 {errors.map((err) => (
                     <Error key={err}>{err}</Error>

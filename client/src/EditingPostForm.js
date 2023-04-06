@@ -77,16 +77,17 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
                     </div>
                     <div className="col-auto">
                         <label htmlFor="comment">Comment</label>
-                        <input
+                        <textarea
                             type="text"
                             id="comment"
+                            rows="5"
                             className="form-control mb-1"
                             value={userComment}
                             onChange={(e) => setUserComment(e.target.value)}
                         />
                     </div>
                     <div className="col-auto">
-                        <input className="btn btn-outline-dark" type="submit" value="Submit" />
+                        <input className="btn btn-outline-dark mb-2" type="submit" value="Submit" />
                     </div>
                     {errors.map((err) => (
                         <Error key={err}>{err}</Error>
