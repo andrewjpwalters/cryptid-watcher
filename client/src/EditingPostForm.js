@@ -72,7 +72,7 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
                 <input
                     type="text"
                     id="comment"
-                    value={comment}
+                    value={userComment}
                     onChange={(e) => setUserComment(e.target.value)}
                 />
                 <button type="submit">
