@@ -2,10 +2,10 @@ import { useState } from "react";
 import Error from "./Error";
 import OptionList from "./OptionList";
 
-function EditingPostForm({ id, comment, cryptid, cryptids, location, locations }) {
-    const [cryptidId, setCryptidId] = useState("")
-    const [locationId, setLocationId] = useState("")
-    const [comment, setComment] = useState("");
+function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, onUpdatePost }) {
+    const [cryptidId, setCryptidId] = useState(cryptid)
+    const [locationId, setLocationId] = useState(location)
+    const [userComment, setUserComment] = useState(comment);
     const [errors, setErrors] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -19,15 +19,12 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations }
             body: JSON.stringify({
                 cryptid_id: cryptidId,
                 location_id: locationId,
-                comment
+                comment: userComment
             }),
         }).then((r) => {
             setIsLoading(false);
             if (r.ok) {
-                setCryptidId("")
-                setLocationId("")
-                setComment("")
-                onAddPost(r)
+                r.json().then((updatedPost) => onUpdatePost(updatedPost))
             } else {
                 r.json().then((err) => setErrors(err.errors));
             }
@@ -52,7 +49,6 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations }
 
     return (
         <>
-            <h2>Submit Sighting</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="cryptid_id">Cryptid</label>
                 <select
@@ -77,10 +73,10 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations }
                     type="text"
                     id="comment"
                     value={comment}
-                    onChange={(e) => setComment(e.target.value)}
+                    onChange={(e) => setUserComment(e.target.value)}
                 />
                 <button type="submit">
-                    {isLoading ? "Loading..." : "Submit Sighting"}
+                    {isLoading ? "Loading..." : "Update Sighting"}
                 </button>
                 {errors.map((err) => (
                     <Error key={err}>{err}</Error>

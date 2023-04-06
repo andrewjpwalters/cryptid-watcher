@@ -34,7 +34,18 @@ function PostList() {
     function handleDeletePost(id) {
         const updatedPosts = posts.filter((post) => post.id !== id);
         setPosts(updatedPosts)
-    }
+    };
+
+    function handleUpdatePost(updatedPost) {
+        const updatedPosts = posts.map((post) => {
+            if (post.id === updatedPost.id) {
+                return updatedPost
+            } else {
+                return post
+            }
+        })
+        setPosts(updatedPosts)
+    };
 
     return (
         <>
@@ -50,6 +61,7 @@ function PostList() {
                     location={post.location}
                     locations={locations}
                     onPostDelete={handleDeletePost}
+                    onUpdatePost={handleUpdatePost}
                 />
             ))}
         </>

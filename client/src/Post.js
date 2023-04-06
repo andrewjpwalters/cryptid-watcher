@@ -1,7 +1,19 @@
-function Post({ id, comment, user, cryptid, cryptids, location, locations, onPostDelete }) {
+import { useState } from "react";
+import EditingPostForm from "./EditingPostForm";
 
-    // pass down cryptid and location id a level above, maybe? Then extract names 
-    // down here with ids for editing form
+function Post({
+    id,
+    comment,
+    user,
+    cryptid,
+    cryptids,
+    location,
+    locations,
+    onPostDelete,
+    onUpdatePost
+}) {
+
+    const [isEditing, setIsEditing] = useState(false)
 
     function handleDeletePost() {
         fetch(`/posts/${id}`, {
@@ -10,13 +22,33 @@ function Post({ id, comment, user, cryptid, cryptids, location, locations, onPos
         onPostDelete(id)
     }
 
+    function handleUpdatePost(updatedPost) {
+        setIsEditing(false);
+        onUpdatePost(updatedPost)
+    }
+
     return (
         <div>
-            <h3>{cryptid.name}</h3>
-            <h4>{location.name}</h4>
-            <p>{comment}</p>
+            {isEditing ? (
+                <EditingPostForm
+                    id={id}
+                    comment={comment}
+                    cryptids={cryptids}
+                    locations={locations}
+                    cryptidId={cryptid.id}
+                    locationId={location.id}
+                    onUpdatePost={handleUpdatePost}
+                />
+            ) : (
+                <>
+                    <h3>{cryptid.name}</h3>
+                    <h4>{location.name}</h4>
+                    <p>{comment}</p>
+                </>
+            )}
             <p>Submitted by {user}</p>
-            <button onClick={handleDeletePost}>Delete Post</button>
+            <button onClick={() => setIsEditing((isEditing) => !isEditing)}>Edit Sighting</button>
+            <button onClick={handleDeletePost}>Delete Sighting</button>
         </div>
 
     )
