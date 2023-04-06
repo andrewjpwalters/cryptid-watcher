@@ -7,6 +7,7 @@ import New from "./New"
 import PostList from "./PostList"
 import CryptidList from "./CryptidList";
 import Home from "./Home";
+import { Container } from "react-bootstrap";
 
 
 function App() {
@@ -25,7 +26,7 @@ function App() {
   return (
     <>
       <NavBar />
-      <main>
+      <Container>
         <Switch>
           <Route exact path="/new">
             <New />
@@ -43,7 +44,7 @@ function App() {
             <h1>404 NOT FOUND</h1>
           </Route>
         </Switch>
-      </main>
+      </Container>
     </>
   );
 }
