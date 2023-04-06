@@ -5,12 +5,10 @@ import Error from "./Error";
 function LocationForm() {
     const [name, setName] = useState("");
     const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
     const history = useHistory();
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsLoading(true);
         fetch("/locations", {
             method: "POST",
             headers: {
@@ -20,7 +18,6 @@ function LocationForm() {
                 name
             }),
         }).then((r) => {
-            setIsLoading(false);
             if (r.ok) {
                 history.push("/posts");
             } else {
@@ -30,24 +27,27 @@ function LocationForm() {
     }
 
     return (
-        <>
+        <div className="mt-4">
             <h2>Submit Location</h2>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="name">Name</label>
-                <input
-                    type="text"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                />
-                <button type="submit">
-                    {isLoading ? "Loading..." : "Submit Location"}
-                </button>
+            <form onSubmit={handleSubmit} className="row gy-2 gx-3 align-items-center">
+                <div className="form-group gap-2">
+                    <div className="col-auto">
+                        <label htmlFor="name">Name</label>
+                        <input
+                            type="text"
+                            id="name"
+                            className="form-control mb-1"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                    </div>
+                    <input className="btn btn-outline-dark" type="submit" value="Submit" />
+                </div>
                 {errors.map((err) => (
                     <Error key={err}>{err}</Error>
                 ))}
             </form>
-        </>
+        </div>
     );
 }
 
