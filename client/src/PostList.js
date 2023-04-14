@@ -13,7 +13,6 @@ function PostList({ cryptids, locations }) {
     }, []);
 
     function handleAddPost(newPost) {
-        console.log(newPost)
         setPosts([...posts, newPost])
     };
 
@@ -35,7 +34,11 @@ function PostList({ cryptids, locations }) {
 
     return (
         <>
-            <PostForm cryptids={cryptids} locations={locations} onAddPost={handleAddPost} />
+            <PostForm
+                cryptids={cryptids}
+                locations={locations}
+                onAddPost={handleAddPost}
+            />
             {posts.slice(0).reverse().map((post) => (
                 <Post
                     key={post.id}

@@ -5,7 +5,7 @@ import { UserContext } from "./context/user";
 import { Card } from "react-bootstrap";
 import Error from "./Error";
 
-function CryptidForm() {
+function CryptidForm({ onAddCryptid }) {
     const { user } = useContext(UserContext)
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
@@ -27,6 +27,7 @@ function CryptidForm() {
             }),
         }).then((r) => {
             if (r.ok) {
+                r.json().then((newCryptid) => onAddCryptid(newCryptid))
                 history.push("/cryptids");
             } else {
                 r.json().then((err) => setErrors(err.errors));

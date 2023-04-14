@@ -2,7 +2,7 @@ import { useState } from "react";
 import CryptidForm from "./CryptidForm";
 import LocationForm from "./LocationForm";
 
-function New() {
+function New({ onAddCryptid, onAddLocation }) {
 
     const [showCryptidForm, setShowCryptidForm] = useState(false)
     const [showLocationForm, setShowLocationForm] = useState(false)
@@ -20,7 +20,7 @@ function New() {
     return (
         <>
             {showCryptidForm ? (
-                <CryptidForm />
+                <CryptidForm onAddCryptid={onAddCryptid} />
             ) : (
                 <button
                     onClick={handleShowCryptidForm}
@@ -31,7 +31,7 @@ function New() {
             )}
             <h4 className="my-4">OR</h4>
             {showLocationForm ? (
-                <LocationForm />
+                <LocationForm onAddLocation={onAddLocation} />
             ) : (
                 <button
                     onClick={handleShowLocationForm}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHistory } from "react-router";
 import Error from "./Error";
 
-function LocationForm() {
+function LocationForm({ onAddLocation }) {
     const [name, setName] = useState("");
     const [errors, setErrors] = useState([]);
     const history = useHistory();
@@ -19,6 +19,7 @@ function LocationForm() {
             }),
         }).then((r) => {
             if (r.ok) {
+                r.json().then((newLocation) => onAddLocation(newLocation))
                 history.push("/posts");
             } else {
                 r.json().then((err) => setErrors(err.errors));

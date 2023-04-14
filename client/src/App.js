@@ -35,6 +35,14 @@ function App() {
       .then(setLocations)
   }, []);
 
+  function handleAddLocation(newLocation) {
+    setLocations([...locations, newLocation])
+  };
+
+  function handleAddCryptid(newCryptid) {
+    setCryptids([...cryptids, newCryptid])
+  };
+
   if (!user) return <Login onLogin={setUser} />;
 
   return (
@@ -43,7 +51,7 @@ function App() {
       <Container>
         <Switch>
           <Route exact path="/new">
-            <New />
+            <New onAddCryptid={handleAddCryptid} onAddLocation={handleAddLocation} />
           </Route>
           <Route exact path="/cryptids">
             <CryptidList cryptids={cryptids} />
