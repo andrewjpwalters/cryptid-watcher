@@ -26,13 +26,13 @@ function App() {
   useEffect(() => {
     fetch("/cryptids")
       .then((r) => r.json())
-      .then(setCryptids)
+      .then((data) => setCryptids(data));
   }, []);
 
   useEffect(() => {
     fetch("/locations")
       .then((r) => r.json())
-      .then(setLocations)
+      .then((data) => setLocations(data));
   }, []);
 
   function handleAddLocation(newLocation) {

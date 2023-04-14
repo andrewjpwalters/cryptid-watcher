@@ -1,27 +1,33 @@
-import { useState, useContext } from "react";
-import { UserContext } from "./context/user";
+import { useState } from "react";
 import EditingPostForm from "./EditingPostForm";
 import { Card, Button } from "react-bootstrap";
+import Error from "./Error";
 
 function Post({
     id,
     comment,
     postUser,
     cryptid,
-    cryptids,
+    cryptidsEditForm,
     location,
-    locations,
+    locationsEditForm,
     onPostDelete,
     onUpdatePost
 }) {
-    const { user } = useContext(UserContext)
     const [isEditing, setIsEditing] = useState(false)
+    const [errors, setErrors] = useState([])
 
     function handleDeletePost() {
         fetch(`/posts/${id}`, {
             method: "DELETE",
-        });
-        onPostDelete(id)
+        })
+            .then(r => {
+                if (r.ok) {
+                    onPostDelete(id)
+                } else {
+                    r.json().then((err) => setErrors(err.errors));
+                }
+            })
     }
 
     function handleUpdatePost(updatedPost) {
@@ -40,8 +46,8 @@ function Post({
                     <EditingPostForm
                         id={id}
                         comment={comment}
-                        cryptids={cryptids}
-                        locations={locations}
+                        cryptidsEditForm={cryptidsEditForm}
+                        locationsEditForm={locationsEditForm}
                         cryptidId={cryptid.id}
                         locationId={location.id}
                         onUpdatePost={handleUpdatePost}
@@ -50,17 +56,14 @@ function Post({
                     <>
                     </>
                 )}
-                {user.id === postUser.id ? (
-                    <>
-                        <Button variant="outline-dark" onClick={() => setIsEditing((isEditing) => !isEditing)}>
-                            {isEditing ? ("Cancel Edit") : ("Edit Sighting")}
-                        </Button>
-                        <Button className="mx-2" variant="danger" onClick={handleDeletePost}>Delete Sighting</Button>
-                    </>
-                ) : (
-                    <></>
-                )}
+                <Button variant="outline-dark" onClick={() => setIsEditing((isEditing) => !isEditing)}>
+                    {isEditing ? ("Cancel Edit") : ("Edit Sighting")}
+                </Button>
+                <Button className="mx-2" variant="danger" onClick={handleDeletePost}>Delete Sighting</Button>
             </Card.Body>
+            {errors || [].map((err) => (
+                <Error key={err}>{err}</Error>
+            ))}
         </Card>
 
     )

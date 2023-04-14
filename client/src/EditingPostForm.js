@@ -2,7 +2,7 @@ import { useState } from "react";
 import Error from "./Error";
 import OptionList from "./OptionList";
 
-function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, onUpdatePost }) {
+function EditingPostForm({ id, comment, cryptid, cryptidsEditForm, location, locationsEditForm, onUpdatePost }) {
     const [cryptidId, setCryptidId] = useState(cryptid)
     const [locationId, setLocationId] = useState(location)
     const [userComment, setUserComment] = useState(comment);
@@ -24,12 +24,12 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
             if (r.ok) {
                 r.json().then((updatedPost) => onUpdatePost(updatedPost))
             } else {
-                r.json().then((err) => setErrors(err.error));
+                r.json().then((err) => setErrors(err.errors));
             }
         });
     }
 
-    const cryptidData = cryptids.map((crytpidObj) => {
+    const cryptidData = cryptidsEditForm.map((crytpidObj) => {
         return <OptionList
             key={crytpidObj.id}
             id={crytpidObj.id}
@@ -37,7 +37,7 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
         />
     })
 
-    const locationData = locations.map((locationObj) => {
+    const locationData = locationsEditForm.map((locationObj) => {
         return <OptionList
             key={locationObj.id}
             id={locationObj.id}
@@ -89,7 +89,7 @@ function EditingPostForm({ id, comment, cryptid, cryptids, location, locations, 
                     <div className="col-auto">
                         <input className="btn btn-outline-dark mb-2" type="submit" value="Submit" />
                     </div>
-                    {errors.map((err) => (
+                    {errors || [].map((err) => (
                         <Error key={err}>{err}</Error>
                     ))}
                 </div>

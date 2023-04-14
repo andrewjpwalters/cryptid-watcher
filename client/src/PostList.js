@@ -9,7 +9,7 @@ function PostList({ cryptids, locations }) {
     useEffect(() => {
         fetch("/posts")
             .then((r) => r.json())
-            .then(setPosts)
+            .then((data) => setPosts(data));
     }, []);
 
     function handleAddPost(newPost) {
@@ -46,9 +46,9 @@ function PostList({ cryptids, locations }) {
                     comment={post.comment}
                     postUser={post.user}
                     cryptid={post.cryptid}
-                    cryptids={cryptids}
                     location={post.location}
-                    locations={locations}
+                    cryptidsEditForm={cryptids}
+                    locationsEditForm={locations}
                     onPostDelete={handleDeletePost}
                     onUpdatePost={handleUpdatePost}
                 />
