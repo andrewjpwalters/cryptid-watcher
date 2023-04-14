@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import { UserContext } from "./context/user";
 import NavBar from "./NavBar";
@@ -12,6 +12,8 @@ import { Container } from "react-bootstrap";
 
 function App() {
   const { user, setUser } = useContext(UserContext)
+  const [cryptids, setCryptids] = useState([])
+  const [locations, setLocations] = useState([])
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -20,6 +22,18 @@ function App() {
       }
     });
   }, [setUser]);
+
+  useEffect(() => {
+    fetch("/cryptids")
+      .then((r) => r.json())
+      .then(setCryptids)
+  }, []);
+
+  useEffect(() => {
+    fetch("/locations")
+      .then((r) => r.json())
+      .then(setLocations)
+  }, []);
 
   if (!user) return <Login onLogin={setUser} />;
 
@@ -32,10 +46,10 @@ function App() {
             <New />
           </Route>
           <Route exact path="/cryptids">
-            <CryptidList />
+            <CryptidList cryptids={cryptids} />
           </Route>
           <Route exact path="/posts">
-            <PostList />
+            <PostList cryptids={cryptids} locations={locations} />
           </Route>
           <Route exact path="/">
             <Home />

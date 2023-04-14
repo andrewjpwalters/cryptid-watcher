@@ -1,17 +1,6 @@
-import { useEffect } from 'react';
-import { useState } from 'react';
 import Cryptid from './Cryptid';
 
-function CryptidList() {
-
-    const [cryptids, setCryptids] = useState([])
-
-    useEffect(() => {
-        fetch("/cryptids")
-            .then((r) => r.json())
-            .then(setCryptids)
-    }, []);
-
+function CryptidList({ cryptids }) {
 
     return (
         <>
