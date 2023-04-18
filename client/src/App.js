@@ -14,6 +14,7 @@ function App() {
   const { user, setUser } = useContext(UserContext)
   const [cryptids, setCryptids] = useState([])
   const [locations, setLocations] = useState([])
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     fetch("/me").then((r) => {
@@ -27,12 +28,18 @@ function App() {
     fetch("/cryptids")
       .then((r) => r.json())
       .then((data) => setCryptids(data));
-  }, []);
+  }, [posts]);
 
   useEffect(() => {
     fetch("/locations")
       .then((r) => r.json())
       .then((data) => setLocations(data));
+  }, []);
+
+  useEffect(() => {
+    fetch("/posts")
+      .then((r) => r.json())
+      .then((data) => setPosts(data));
   }, []);
 
   function handleAddLocation(newLocation) {
@@ -41,6 +48,26 @@ function App() {
 
   function handleAddCryptid(newCryptid) {
     setCryptids([...cryptids, newCryptid])
+  };
+
+  function handleAddPost(newPost) {
+    setPosts([...posts, newPost])
+  };
+
+  function handleDeletePost(id) {
+    const updatedPosts = posts.filter((post) => post.id !== id);
+    setPosts(updatedPosts)
+  };
+
+  function handleUpdatePost(updatedPost) {
+    const updatedPosts = posts.map((post) => {
+      if (post.id === updatedPost.id) {
+        return updatedPost
+      } else {
+        return post
+      }
+    })
+    setPosts(updatedPosts)
   };
 
   if (!user) return <Login onLogin={setUser} />;
@@ -57,7 +84,13 @@ function App() {
             <CryptidList cryptids={cryptids} />
           </Route>
           <Route exact path="/posts">
-            <PostList cryptids={cryptids} locations={locations} />
+            <PostList
+              posts={posts}
+              cryptids={cryptids}
+              locations={locations}
+              onAddPost={handleAddPost}
+              onDeletePost={handleDeletePost}
+              onUpdatePost={handleUpdatePost} />
           </Route>
           <Route exact path="/">
             <Home />
