@@ -13,7 +13,7 @@ function CryptidList({ cryptids }) {
                     img_url={cryptid.image_url}
                     description={cryptid.description}
                     user={cryptid.user.username}
-                    locations={cryptid.locations}
+                    locations={cryptid.unique_locations}
                 />
             ))}
         </>
