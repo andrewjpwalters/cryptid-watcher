@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 puts "Seeding!"
 
-User.create(username: "dave123", password_digest: "123")
-User.create(username: "caitlin345", password_digest: "123")
-User.create(username: "steveo456", password_digest: "123")
+User.create(username: "dave123", password: "123")
+User.create(username: "caitlin345", password: "123")
+User.create(username: "steveo456", password: "123")
 
 Cryptid.create(name: "Mothman", description: "Mothy with glowing red eyes", image_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Mothman_Artist%27s_Impression.png/1280px-Mothman_Artist%27s_Impression.png", user_id: 1)
 Cryptid.create(name: "Bigfoot", description: "Big, hairy, big feet", image_url: "https://upload.wikimedia.org/wikipedia/en/9/99/Patterson%E2%80%93Gimlin_film_frame_352.jpg", user_id: 2)
